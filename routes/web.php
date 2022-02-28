@@ -44,7 +44,7 @@ Route::get('/dataikan', [DataikanController::class,'index'])->name('dataikan');
 
     Route::get('/dataku', [DatakuController::class,'index'])->name('dataku');
     Route::get('/dataku/insert_dataku', [DatakuController::class,'insert_dataku']);
-    Route::get('/dataku/update_dataku/{id}', [DatakuController::class,'update_dataku']);
+    Route::post('/dataku/update_dataku/', [DatakuController::class,'update_dataku']);
     Route::get('/dataku/delete_dataku/{id}', [DatakuController::class,'delete_dataku']);
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/dataku/printer_dataku', [DatakuController::class,'printer_dataku']);

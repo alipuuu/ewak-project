@@ -59,7 +59,7 @@
                         <td class="text-center">{{ $data->updated_at}}</td>
                         <td class="text-center" >
                             <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#detail{{ $data->id}}">Detail</a>
-                            <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit{{ $data->id}}">Edit</a>
+                            <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#update{{ $data->id}}">Update</a>
                             <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete{{ $data->id}}">Delete</a>
                         </td>
                     </tr>
@@ -169,19 +169,22 @@
                     </div>
                 </div>
                 @foreach ($dataku as $data)
-                  <div class="modal fade" id="edit{{ $data->id}}">
+                  <div class="modal fade" id="update{{ $data->id}}">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                          <h5 class="modal-title">EDIT DATA {{ $data->id}}</h5>
+                          <h5 class="modal-title">UPDATE DATA {{ $data->id}}</h5>
                         </div>
-                        <form action="/dataku/update/dataku" method="GET" enctype="multipart/form-data">
+                        <form action="/dataku/update/dataku" method="POST" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="form-group">
                                 <label>Tanggal</label>
                                 <input name="date" type="date" class="form-control" value="{{$data->date}}">
+                                 {{-- id dataku --}}
+                                <input type="hidden" name="id" class="form-control" value="{{$data->id}}">
+                                {{-- id dataku --}}
                                 <div class="text-danger">
                                     @error('date')
                                     {{$message}}

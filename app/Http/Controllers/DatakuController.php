@@ -36,7 +36,7 @@ class DatakuController extends Controller
 
     public function insert_dataku(Request $request)
     {
-        DatakuModel::create($request->all());
+        //DatakuModel::create($request->all());
         Request()->validate([
             'date' => 'required',
             'source_id' => 'required',
@@ -65,31 +65,31 @@ class DatakuController extends Controller
             'message' => Request()->message,
         ];
         $this->DatakuModel->addData($dataku);
-        return redirect()->route('dataku');
+        return redirect()->route('dataku')->with('pesan', 'Data berhasil ditambahkan!');
     }
 
-    public function update_dataku(Request $request, $id)
+    public function update_dataku(Request $request)
     {
-        $dataku = DatakuModel::find($id);
+        $dataku = DatakuModel::find($request->id);
         $dataku->update($request->all());
-        Request()->validate([
-            'date' => 'required',
-            'source_id' => 'required',
-            'crew' => 'required',
-            'dest_id' => 'required',
-            'lat' => 'required',
-            'longitude' => 'required',
-            'message' => 'required',
-        ],[
-            'date.required'=>' tanggal wajib diisi !!',
-            'source_id.required' => 'source id wajib diisi !!',
-            'crew.required' => 'crew wajib diisi !!',
-            'dest_id.required' => 'dest id wajib diisi !!',
-            'lat.required' => 'lat wajib diisi !!',
-            'longitude.required' => 'longitude wajib diisi !!',
-            'message.required' => 'message wajib diisi !!',
-        ]);
-        $this->DatakuModel->editData($dataku);
+        // Request()->validate([
+        //     'date' => 'required',
+        //     'source_id' => 'required',
+        //     'crew' => 'required',
+        //     'dest_id' => 'required',
+        //     'lat' => 'required',
+        //     'longitude' => 'required',
+        //     'message' => 'required',
+        // ],[
+        //     'date.required'=>' tanggal wajib diisi !!',
+        //     'source_id.required' => 'source id wajib diisi !!',
+        //     'crew.required' => 'crew wajib diisi !!',
+        //     'dest_id.required' => 'dest id wajib diisi !!',
+        //     'lat.required' => 'lat wajib diisi !!',
+        //     'longitude.required' => 'longitude wajib diisi !!',
+        //     'message.required' => 'message wajib diisi !!',
+        // ]);
+        // $this->DatakuModel->editData($dataku);
         return redirect()->route('dataku');
     }
 

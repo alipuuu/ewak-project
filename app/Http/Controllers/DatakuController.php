@@ -71,6 +71,7 @@ class DatakuController extends Controller
     public function update_dataku(Request $request)
     {
         $dataku = DatakuModel::find($request->id);
+        // dd($request->all());
         $dataku->update($request->all());
         // Request()->validate([
         //     'date' => 'required',
@@ -90,7 +91,7 @@ class DatakuController extends Controller
         //     'message.required' => 'message wajib diisi !!',
         // ]);
         // $this->DatakuModel->editData($dataku);
-        return redirect()->route('dataku');
+        return redirect()->route('dataku')->with('pesan', 'Data berhasil diupdate!');;
     }
 
     public function delete_dataku($id)

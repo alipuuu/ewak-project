@@ -67,7 +67,7 @@
                             <span aria-hidden="true">&times;</span></button>
                             <h5 class="modal-title">TAMBAH DATA</h5>
                         </div>
-                        <form action="/dataikan/insert_dataikan" method="GET" enctype="multipart/form-data">
+                        <form action="/dataikan/insert_dataikan/" method="GET" enctype="multipart/form-data">
                             @csrf
                         <div class="modal-body">
                             <div class="form-group">

@@ -78,7 +78,7 @@ class DataikanController extends Controller
         //     'stock_ikan.required' => 'stock ikan wajib diisi !!',
         // ]);
         // $this->DataikanModel->editData($dataikan);
-        return redirect()->route('dataikan')->with('pesan', 'Data berhasil diupdate!');;
+        return redirect()->route('dataikan')->with('pesan', 'Data berhasil diupdate!');
     }
 
     public function delete_dataikan($id)

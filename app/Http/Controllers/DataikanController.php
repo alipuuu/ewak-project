@@ -21,7 +21,6 @@ class DataikanController extends Controller
     public function index()
     {
         $dataikan = DataikanModel::all();
-        //dd($dataikan);
         return view('dataikan.v_dataikan', compact('dataikan'));
     }
 

@@ -65,7 +65,7 @@ class DataikanController extends Controller
     public function update_dataikan(Request $request)
     {
         $dataikan = DataikanModel::find($request->id);
-        //dd($request->all());
+        // dd($request->all());
         $dataikan->update($request->all());
         // Request()->validate([
         //     'nama_ikan' => 'required',

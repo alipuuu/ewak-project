@@ -63,7 +63,7 @@ Route::get('/dataikan', [DataikanController::class,'index'])->name('dataikan');
 
     Route::get('/riwayatbeli', [RiwayatbeliController::class,'index'])->name('riwayatbeli');
     Route::post('/riwayatbeli/insert_riwayatbeli', [RiwayatbeliController::class,'insert_riwayatbeli']);
-    Route::post('/riwayatbeli/update_riwayatbeli/{id}', [RiwayatbeliController::class,'update_riwayatbeli']);
+    Route::post('/riwayatbeli/update_riwayatbeli/', [RiwayatbeliController::class,'update_riwayatbeli']);
     Route::get('/riwayatbeli/delete_riwayatbeli/{id}', [RiwayatbeliController::class,'delete_riwayatbeli']);
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/riwayatbeli/printer_riwayatbeli', [RiwayatbeliController::class,'printer_riwayatbeli']);

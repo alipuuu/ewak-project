@@ -53,7 +53,7 @@
                         <td class="text-center">{{ $data->updated_at}}</td>
                         <td class="text-center">
                             <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#detail{{ $data->id}}">Detail</a>
-                            <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit{{ $data->id}}">Edit</a>
+                            <a class="btn btn-sm btn-warning" data-toggle="modal" data-target="#update{{ $data->id}}">Update</a>
                             <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete{{ $data->id}}">Delete</a>
                         </td>
                     </tr>
@@ -67,7 +67,7 @@
                             <h5 class="modal-title">TAMBAH DATA</h5>
                         </div>
                         <form action="/riwayatbeli/insert_riwayatbeli" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}
+                            @csrf
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Rekening ID</label>
@@ -111,22 +111,27 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                         </div>
+                    </form>
                     </div>
                 </div>
                 @foreach ($riwayatbeli as $data)
-                  <div class="modal fade" id="edit{{ $data->id}}">
+                  <div class="modal fade" id="update{{ $data->id}}">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
-                          <h5 class="modal-title">EDIT DATA {{ $data->id}}</h5>
+                          <h5 class="modal-title">UPDATE DATA {{ $data->id}}</h5>
                         </div>
                         <form action="/riwayatbeli/update_riwayatbeli" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Rekening ID</label>
                                     <input name="rekening_id" class="form-control" value="{{$data->rekening_id}}">
+                                    {{-- id riwayatbeli --}}
+                                    <input type="hidden" name="id" class="form-control" value="{{$data->id}}">
+                                    {{-- id riwayatbeli --}}
                                     <div class="text-danger">
                                         @error('rekening_id')
                                         {{$message}}

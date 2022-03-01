@@ -36,7 +36,7 @@ class RiwayatbeliController extends Controller
 
     public function insert_riwayatbeli(Request $request)
     {
-        RiwayatbeliModel::create($request->all());
+        // RiwayatbeliModel::create($request->all());
         Request()->validate([
             'rekening_id' => 'required',
             'ikan_id' => 'required',
@@ -50,33 +50,33 @@ class RiwayatbeliController extends Controller
         ]);
 
         $riwayatbeli = [
-            'id' => Request()->id,
             'rekening_id' => Request()->rekening_id,
             'ikan_id' => Request()->ikan_id,
             'jumlah_beli' => Request()->jumlah_beli,
             'kwitansi' => Request()->kwitansi,
         ];
         $this->RiwayatbeliModel->addData($riwayatbeli);
-        return redirect()->route('riwayatbeli');
+        return redirect()->route('riwayatbeli')->with('pesan', 'Data berhasil ditambahkan!');
     }
 
-    public function update_riwayatbeli(Request $request, $id)
+    public function update_riwayatbeli(Request $request)
     {
-        $riwayatbeli = RiwayatbeliModel::find($id);
+        $riwayatbeli = RiwayatbeliModel::find($request->id);
+        // dd($request->all());
         $riwayatbeli->update($request->all());
-        Request()->validate([
-            'rekening_id' => 'required',
-            'ikan_id' => 'required',
-            'jumlah_beli' => 'required',
-            'kwitansi' => 'required',
-        ],[
-            'rekening_id.required'=>' rekening id wajib diisi !!',
-            'ikan_id.required' => 'ikan id wajib diisi !!',
-            'jumlah_beli.required' => 'jumlah beli wajib diisi !!',
-            'kwitansi.required' => 'kwitansi wajib diisi !!',
-        ]);
-        $this->RiwayatbeliModel->editData($riwayatbeli);
-        return redirect()->route('riwayatbeli');
+        // Request()->validate([
+        //     'rekening_id' => 'required',
+        //     'ikan_id' => 'required',
+        //     'jumlah_beli' => 'required',
+        //     'kwitansi' => 'required',
+        // ],[
+        //     'rekening_id.required'=>' rekening id wajib diisi !!',
+        //     'ikan_id.required' => 'ikan id wajib diisi !!',
+        //     'jumlah_beli.required' => 'jumlah beli wajib diisi !!',
+        //     'kwitansi.required' => 'kwitansi wajib diisi !!',
+        // ]);
+        // $this->RiwayatbeliModel->editData($riwayatbeli);
+        return redirect()->route('riwayatbeli')->with('pesan', 'Data berhasil diupdate!');
     }
 
     public function delete_riwayatbeli($id)

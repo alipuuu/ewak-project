@@ -36,46 +36,44 @@ class TangkapanController extends Controller
 
     public function insert_tangkapan(Request $request)
     {
-        TangkapanModel::create($request->all());
+        // TangkapanModel::create($request->all());
         Request()->validate([
-            'id' => 'required',
             'source_id' => 'required',
             'date' => 'required',
             'hasil_tangkapan' => 'required',
         ],[
-            'id.required'=>' id tangkapan wajib diisi !!',
             'source_id.required'=>' source id wajib diisi !!',
             'date.required' => 'tanggal wajib diisi !!',
             'hasil_tangkapan.required' => 'hasil tangkapan wajib diisi !!',
         ]);
         $tangkapan = [
-            'id' => Request()->id,
             'source_id' => Request()->source_id,
             'date' => Request()->date,
             'hasil_tangkapan' => Request()->hasil_tangkapan,
         ];
         $this->TangkapanModel->addData($tangkapan);
-        return redirect()->route('tangkapan');
+        return redirect()->route('tangkapan')->with('pesan', 'Data berhasil ditambahkan!');
     }
 
-    public function update_tangkapan(Request $request, $id)
+    public function update_tangkapan(Request $request)
     {
-        $tangkapan = TangkapanModel::find($id);
+        $tangkapan = TangkapanModel::find($request->id);
+        // dd($request->all());
         $tangkapan->update($request->all());
-        Request()->validate([
-            'id' => 'required',
-            'source_id' => 'required',
-            'date' => 'required',
-            'hasil_tangkapan' => 'required',
-        ],[
-            'id.required'=>' id tangkapan wajib diisi !!',
-            'source_id.required'=>' source id wajib diisi !!',
-            'date.required' => 'tanggal wajib diisi !!',
-            'hasil_tangkapan.required' => 'hasil tangkapan wajib diisi !!',
-        ]);
+        // Request()->validate([
+        //     'id' => 'required',
+        //     'source_id' => 'required',
+        //     'date' => 'required',
+        //     'hasil_tangkapan' => 'required',
+        // ],[
+        //     'id.required'=>' id tangkapan wajib diisi !!',
+        //     'source_id.required'=>' source id wajib diisi !!',
+        //     'date.required' => 'tanggal wajib diisi !!',
+        //     'hasil_tangkapan.required' => 'hasil tangkapan wajib diisi !!',
+        // ]);
 
-            $this->TangkapanModel->editData($tangkapan);
-            return redirect()->route('tangkapan');
+        //     $this->TangkapanModel->editData($tangkapan);
+            return redirect()->route('tangkapan')->with('pesan', 'Data berhasil diupdate!');
     }
 
     public function delete_tangkapan($id)

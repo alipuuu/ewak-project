@@ -80,8 +80,8 @@ Route::get('/dataikan', [DataikanController::class,'index'])->name('dataikan');
     Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan');
 
     Route::get('/tangkapan', [TangkapanController::class,'index'])->name('tangkapan');
-    Route::post('/tangkapan/insert_tangkapan', [TangkapanController::class,'insert_tangkapan']);
-    Route::post('/tangkapan/update_tangkapan/{id}', [TangkapanController::class,'update_tangkapan']);
+    Route::get('/tangkapan/insert_tangkapan', [TangkapanController::class,'insert_tangkapan']);
+    Route::post('/tangkapan/update_tangkapan/', [TangkapanController::class,'update_tangkapan']);
     Route::get('/tangkapan/delete_tangkapan/{id}', [TangkapanController::class,'delete_tangkapan']);
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/tangkapan/printer_tangkapan', [TangkapanController::class,'printer_tangkapan']);

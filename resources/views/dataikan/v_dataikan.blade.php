@@ -149,7 +149,7 @@
                                 <div class="form-group">
                                 <label>Nama Ikan</label>
                                 <input name="nama_ikan" class="form-control" value="{{$data->nama_ikan}}">
-                                 {{-- id dataikan --}}
+                                {{-- id dataikan --}}
                                 <input type="hidden" name="id" class="form-control" value="{{$data->id}}">
                                 {{-- id dataikan --}}
                                 <div class="text-danger">

@@ -37,45 +37,52 @@ class KapalController extends Controller
 
     public function insert_kapal(Request $request)
     {
-        $kapal = new KapalModel;
-        $kapal->source_id = $request->input('source_id');
-        $kapal->pemilik_kapal = $request->input('pemilik_kapal');
-        if($request->hasFile('foto_kapal'))
-        {
-            $file = $request->file('foto_kapal');
-            $extention = $file->getClientOriginalExtension();
-            $fileName = time().'.'.$extention;
-            $file->move('foto_kapal/',$fileName);
-            $kapal->foto_kapal = $fileName;
-        } else{
-            return $request;
-            $kapal->foto_kapal = '';
-        }
-        $kapal->crew = $request->input('crew');
-        $kapal->contact = $request->input('contact');
+         Request()->validate([
+            'source_id' => 'required',
+            'pemilik_kapal' => 'required',
+            'foto_kapal' => 'required',
+            'crew' => 'required',
+            'contact' => 'required',
+        ],[
+            'source_id.required'=>' source id wajib diisi !!',
+            'pemilik_kapal.required'=>' pemilik kapal wajib diisi !!',
+            'foto_kapal.required' => 'foto kapal wajib diisi !!',
+            'crew.required' => 'crew wajib diisi !!',
+            'contact.required' => 'contact ikan wajib diisi !!',
+        ]);
 
-        $kapal->save();
-        return redirect()->back();
+        $kapal = [
+            'source_id' => Request()->source_id,
+            'pemilik_kapal' => Request()->pemilik_kapal,
+            'foto_kapal' => Request()->foto_kapal,
+            'crew' => Request()->crew,
+            'contact' => Request()->contact,
+        ];
+        $this->KapalModel->addData($kapal);
+        return redirect()->route('kapal')->with('pesan', 'Data berhasil ditambahkan!');
     }
 
-    public function update_kapal(Request $request, $id)
+    public function update_kapal(Request $request)
     {
-        $kapal = KapalModel::find($id);
-        $kapal->source_id = $request->input('source_id');
-        $kapal->pemilik_kapal = $request->input('pemilik_kapal');
-        if($request->hasFile('foto_kapal'))
-        {
-            $file = $request->file('foto_kapal');
-            $extention = $file->getClientOriginalExtension();
-            $fileName = time().'.'.$extention;
-            $file->move('foto_kapal/',$fileName);
-            $kapal->foto_kapal = $fileName;
-        }
-        $kapal->crew = $request->input('crew');
-        $kapal->contact = $request->input('contact');
+        $kapal = KapalModel::find($request->id);
+        $kapal->update($request->all());
+        if ($request->hasFile('file')) {
 
-        $kapal->update();
-        return redirect()->back();
+            $request->validate([
+                'foto_kapal' => 'mimes:jpeg,jpg,bmp,png' // Only allow .jpeg, .jpg, .bmp and .png file types.
+            ]);
+
+            // Save the file locally in the storage/public/ folder under a new folder named /product
+            $request->file->store('foto_kapal', 'public');
+
+            // Store the record, using the new file hashname which will be it's new filename identity.
+            $kapal = new KapalModel([
+                "pemilik_kapal" => $request->get('pemilik_kapal'),
+                "file_path" => $request->file->hashName()
+            ]);
+            $kapal->save(); // Finally, save the record.
+        }
+        return redirect()->route('kapal')->with('pesan', 'Data berhasil diupdate!');
     }
 
     public function delete_kapal($id)

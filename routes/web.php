@@ -54,7 +54,7 @@ Route::get('/dataikan', [DataikanController::class,'index'])->name('dataikan');
 
     Route::get('/kapal', [KapalController::class,'index'])->name('kapal');
     Route::get('/kapal/insert_kapal', [KapalController::class,'insert_kapal']);
-    Route::post('/kapal/update_kapal/{id}', [KapalController::class,'update_kapal']);
+    Route::post('/kapal/update_kapal/', [KapalController::class,'update_kapal']);
     Route::get('/kapal/delete_kapal/{id}', [KapalController::class,'delete_kapal']);
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/kapal/printer_kapal', [KapalController::class,'printer_kapal']);

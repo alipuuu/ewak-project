@@ -36,45 +36,43 @@ class SaldoController extends Controller
 
     public function insert_saldo(Request $request)
     {
-        SaldoModel::create($request->all());
+        // SaldoModel::create($request->all());
         Request()->validate([
-            'id' => 'required',
             'pengguna' => 'required',
-            'rekening_id' => 'required',
+            'rekening' => 'required',
             'saldo' => 'required',
         ],[
-            'id.required'=>' id saldo wajib diisi !!',
             'pengguna.required'=>' user wajib diisi !!',
-            'rekening_id.required' => 'rekening_id wajib diisi !!',
+            'rekening.required' => 'rekening wajib diisi !!',
             'saldo.required' => 'saldo wajib diisi !!',
         ]);
         $saldo = [
-            'id' => Request()->id,
             'pengguna' => Request()->pengguna,
-            'rekening_id' => Request()->rekening_id,
+            'rekening' => Request()->rekening,
             'saldo' => Request()->saldo,
         ];
         $this->SaldoModel->addData($saldo);
-        return redirect()->route('saldo');
+        return redirect()->route('saldo')->with('pesan', 'Data berhasil ditambahkan!');
     }
 
-    public function update_saldo(Request $request, $id)
+    public function update_saldo(Request $request)
     {
-        $saldo = SaldoModel::find($id);
+        $saldo = SaldoModel::find($request->id);
+        // dd($request->all());
         $saldo->update($request->all());
-        Request()->validate([
-            'id' => 'required',
-            'pengguna' => 'required',
-            'rekening_id' => 'required',
-            'saldo' => 'required',
-        ],[
-            'id.required'=>' id saldo wajib diisi !!',
-            'pengguna.required'=>' user wajib diisi !!',
-            'rekening_id.required' => 'rekening_id wajib diisi !!',
-            'saldo.required' => 'saldo wajib diisi !!',
-        ]);
-            $this->SaldoModel->editData($saldo);
-        return redirect()->route('saldo');
+        // Request()->validate([
+        //     'id' => 'required',
+        //     'pengguna' => 'required',
+        //     'rekening' => 'required',
+        //     'saldo' => 'required',
+        // ],[
+        //     'id.required'=>' id saldo wajib diisi !!',
+        //     'pengguna.required'=>' user wajib diisi !!',
+        //     'rekening.required' => 'rekening wajib diisi !!',
+        //     'saldo.required' => 'saldo wajib diisi !!',
+        // ]);
+        //     $this->SaldoModel->editData($saldo);
+        return redirect()->route('saldo')->with('pesan', 'Data berhasil diupdate!');
     }
 
     public function delete_saldo($id)

@@ -62,7 +62,7 @@ Route::get('/dataikan', [DataikanController::class,'index'])->name('dataikan');
     Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan');
 
     Route::get('/riwayatbeli', [RiwayatbeliController::class,'index'])->name('riwayatbeli');
-    Route::post('/riwayatbeli/insert_riwayatbeli', [RiwayatbeliController::class,'insert_riwayatbeli']);
+    Route::get('/riwayatbeli/insert_riwayatbeli', [RiwayatbeliController::class,'insert_riwayatbeli']);
     Route::post('/riwayatbeli/update_riwayatbeli/', [RiwayatbeliController::class,'update_riwayatbeli']);
     Route::get('/riwayatbeli/delete_riwayatbeli/{id}', [RiwayatbeliController::class,'delete_riwayatbeli']);
     Route::get('/user', [UserController::class, 'index'])->name('user');
@@ -71,8 +71,8 @@ Route::get('/dataikan', [DataikanController::class,'index'])->name('dataikan');
     Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan');
 
     Route::get('/saldo', [SaldoController::class,'index'])->name('saldo');
-    Route::post('/saldo/insert_saldo', [SaldoController::class,'insert_saldo']);
-    Route::post('/saldo/update_saldo/{id}', [SaldoController::class,'update_saldo']);
+    Route::get('/saldo/insert_saldo', [SaldoController::class,'insert_saldo']);
+    Route::post('/saldo/update_saldo/', [SaldoController::class,'update_saldo']);
     Route::get('/saldo/delete_saldo/{id}', [SaldoController::class,'delete_saldo']);
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/saldo/printer_saldo', [SaldoController::class,'printer_saldo']);

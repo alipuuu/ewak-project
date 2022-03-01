@@ -66,7 +66,7 @@
                             <span aria-hidden="true">&times;</span></button>
                             <h5 class="modal-title">TAMBAH DATA</h5>
                         </div>
-                        <form action="/riwayatbeli/insert_riwayatbeli" method="POST" enctype="multipart/form-data">
+                        <form action="/riwayatbeli/insert_riwayatbeli" method="GET" enctype="multipart/form-data">
                             @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -110,8 +110,8 @@
                             <button class="btn btn-primary" type="submit">Update Data</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
+                        </form>
                         </div>
-                    </form>
                     </div>
                 </div>
                 @foreach ($riwayatbeli as $data)

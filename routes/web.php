@@ -89,8 +89,8 @@ Route::get('/dataikan', [DataikanController::class,'index'])->name('dataikan');
     Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan');
 
     Route::get('/track', [TrackController::class,'index'])->name('track');
-    Route::post('/track/insert_track', [TrackController::class,'insert_track']);
-    Route::post('/track/update_track/{id}', [TrackController::class,'update_track']);
+    Route::get('/track/insert_track', [TrackController::class,'insert_track']);
+    Route::post('/track/update_track/', [TrackController::class,'update_track']);
     Route::get('/track/delete_track/{id}', [TrackController::class,'delete_track']);
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::get('/track/printer_track', [TrackController::class,'printer_track']);

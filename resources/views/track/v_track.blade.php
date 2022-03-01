@@ -56,7 +56,7 @@
                             <span aria-hidden="true">&times;</span></button>
                             <h5 class="modal-title">TAMBAH DATA</h5>
                         </div>
-                        <form action="/track/insert_track" method="POST" enctype="multipart/form-data">
+                        <form action="/track/insert_track" method="GET" enctype="multipart/form-data">
                             @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -127,6 +127,7 @@
                             <button class="btn btn-primary" type="submit">Save Data</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -140,10 +141,14 @@
                           <h5 class="modal-title">EDIT DATA {{ $data->id}}</h5>
                         </div>
                         <form action="/track/update_track" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label>Source ID</label>
                                     <input name="source_id" class="form-control" value="{{$data->source_id}}">
+                                    {{-- id track --}}
+                                    <input type="hidden" name="id" class="form-control" value="{{$data->id}}">
+                                    {{-- id track --}}
                                     <div class="text-danger">
                                         @error('source_id')
                                         {{$message}}

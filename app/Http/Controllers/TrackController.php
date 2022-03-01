@@ -37,9 +37,8 @@ class TrackController extends Controller
 
     public function insert_track(Request $request)
     {
-        TrackModel::create($request->all());
+        // TrackModel::create($request->all());
         Request()->validate([
-            'id' => 'required',
             'source_id' => 'required',
             'dest_id' => 'required',
             'crew' => 'required',
@@ -48,7 +47,6 @@ class TrackController extends Controller
             'received' => 'required',
             'message' => 'required',
         ],[
-            'id.required'=>' id track wajib diisi !!',
             'source_id.required'=>' source id wajib diisi !!',
             'dest_id.required' => 'dest id wajib diisi !!',
             'crew.required' => 'crew wajib diisi !!',
@@ -58,7 +56,6 @@ class TrackController extends Controller
             'message.required' => 'message wajib diisi !!',
         ]);
         $track = [
-            'id' => Request()->id,
             'source_id' => Request()->source_id,
             'dest_id' => Request()->dest_id,
             'crew' => Request()->crew,
@@ -68,34 +65,33 @@ class TrackController extends Controller
             'message' => Request()->message,
         ];
         $this->TrackModel->addData($track);
-        return redirect()->route('track');
+        return redirect()->route('track')->with('pesan', 'Data berhasil ditambahkan!');
     }
 
-    public function update_track(Request $request, $id)
+    public function update_track(Request $request)
     {
-        $track = TrackModel::find($id);
+        $track = TrackModel::find($request->id);
+        // dd($request->all());
         $track->update($request->all());
-        Request()->validate([
-            'id' => 'required',
-            'source_id' => 'required',
-            'dest_id' => 'required',
-            'crew' => 'required',
-            'lat' => 'required',
-            'longitude' => 'required',
-            'received' => 'required',
-            'message' => 'required',
-        ],[
-            'id.required'=>' id track wajib diisi !!',
-            'source_id.required'=>' source id wajib diisi !!',
-            'dest_id.required' => 'dest id wajib diisi !!',
-            'crew.required' => 'crew wajib diisi !!',
-            'lat.required' => 'lat wajib diisi !!',
-            'longitude.required' => 'longitude wajib diisi !!',
-            'received.required' => 'received wajib diisi !!',
-            'message.required' => 'message wajib diisi !!',
-        ]);
-            $this->TrackModel->editData($track);
-            return redirect()->route('track');
+        // Request()->validate([
+        //     'source_id' => 'required',
+        //     'dest_id' => 'required',
+        //     'crew' => 'required',
+        //     'lat' => 'required',
+        //     'longitude' => 'required',
+        //     'received' => 'required',
+        //     'message' => 'required',
+        // ],[
+        //     'source_id.required'=>' source id wajib diisi !!',
+        //     'dest_id.required' => 'dest id wajib diisi !!',
+        //     'crew.required' => 'crew wajib diisi !!',
+        //     'lat.required' => 'lat wajib diisi !!',
+        //     'longitude.required' => 'longitude wajib diisi !!',
+        //     'received.required' => 'received wajib diisi !!',
+        //     'message.required' => 'message wajib diisi !!',
+        // ]);
+        //     $this->TrackModel->editData($track);
+            return redirect()->route('track')->with('pesan', 'Data berhasil diupdate!');
     }
 
     public function delete_track($id)
